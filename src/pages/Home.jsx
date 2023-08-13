@@ -12,6 +12,7 @@ const Home = () => {
         setSelectedRating,
         selectedYear,
         setSelectedYear,
+        search,
     } = useData();
 
     const [allMovies, setAllMovies] = useState(moviesData);
@@ -33,8 +34,23 @@ const Home = () => {
                 (movie) => movie.year === parseInt(selectedYear, 10)
             );
         }
-        setAllMovies(filteredAndSortedData);
-    }, [selectedGenre, selectedYear, selectedRating, moviesData]);
+        if (search.length > 0) {
+            const searchTerm = search.toLowerCase();
+            filteredAndSortedData = filteredAndSortedData.filter(
+                (movie) =>
+                    movie.title.toLowerCase().includes(searchTerm) ||
+                    movie.cast.some((castMember) =>
+                        castMember.toLowerCase().includes(searchTerm)
+                    ) ||
+                    movie.director.toLowerCase().includes(searchTerm)
+            );
+        }
+        if (selectedYear === "allYears") {
+            setAllMovies(moviesData);
+        } else {
+            setAllMovies(filteredAndSortedData);
+        }
+    }, [selectedGenre, selectedYear, selectedRating, moviesData, search]);
 
     return (
         <>

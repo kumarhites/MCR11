@@ -1,7 +1,12 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import { useData } from "../contexts/DataContext";
 
 const Navbar = () => {
+    const { search, setSearch } = useData();
+
+    
+
     return (
         <div className="h-20 bg-neutral-800 flex justify-between">
             <NavLink
@@ -13,14 +18,19 @@ const Navbar = () => {
             <div className="flex items-center">
                 <input
                     type="search"
-                    name=""
-                    id=""
+                    name="search"
+                    id="search"
+                    value={search}
+                    onChange={(e) => setSearch(e.target.value)}
                     className="w-96 p-2 rounded"
                     placeholder="Search for movies by title, cast or director..."
                 />
             </div>
             <div className=" flex gap-5 items-center">
-                <NavLink to="/" className="mb-2 text-xl p-2 font-bold tracking-tight text-gray-50 flex items-center">
+                <NavLink
+                    to="/"
+                    className="mb-2 text-xl p-2 font-bold tracking-tight text-gray-50 flex items-center"
+                >
                     Movies
                 </NavLink>
                 <NavLink

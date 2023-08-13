@@ -25,6 +25,7 @@ export const DataProvider = ({ children }) => {
     const [selectedGenre, setSelectedGenre] = useState("allGenre");
     const [selectedRating, setSelectedRating] = useState("allRating");
     const [selectedYear, setSelectedYear] = useState("allYears");
+    const [search, setSearch] = useState("");
 
     useEffect(() => {
         if (localStorage.getItem("movies")) {
@@ -95,6 +96,8 @@ export const DataProvider = ({ children }) => {
                 selectedYear,
                 setSelectedYear,
                 handleAddNewData,
+                search,
+                setSearch,
             }}
         >
             {children}
