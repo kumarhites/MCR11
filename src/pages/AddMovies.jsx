@@ -7,12 +7,12 @@ const AddMovies = () => {
     const [newMovie, setNewMovie] = useState({
         id: uuidv4(),
         title: "",
-        genre: "",
+        genre: [],
         year: "",
         rating: "",
         director: "",
         writer: "",
-        cast: "",
+        cast: [],
         summary: "",
         imageURL: "",
     });
@@ -21,7 +21,8 @@ const AddMovies = () => {
         const { name, value } = e.target;
         setNewMovie((prevData) => ({
             ...prevData,
-            [name]: value,
+            [name]:
+                name === "genre" || name === "cast" ? value.split(",") : value,
         }));
     };
 
@@ -46,12 +47,12 @@ const AddMovies = () => {
         setNewMovie({
             id: uuidv4(),
             title: "",
-            genre: "",
+            genre: [],
             year: "",
             rating: "",
             director: "",
             writer: "",
-            cast: "",
+            cast: [],
             summary: "",
             imageURL: "",
         });
@@ -82,7 +83,7 @@ const AddMovies = () => {
                         type="text"
                         id="genre"
                         name="genre"
-                        value={newMovie.genre}
+                        value={newMovie.genre.join(", ")}
                         onChange={handleInputChange}
                         className="block w-full p-4 text-sm text-gray-900 rounded border required"
                     />
@@ -138,7 +139,7 @@ const AddMovies = () => {
                         type="text"
                         id="cast"
                         name="cast"
-                        value={newMovie.cast}
+                        value={newMovie.cast.join(", ")}
                         onChange={handleInputChange}
                         className="block w-full p-4 text-sm text-gray-900 rounded border required"
                     />

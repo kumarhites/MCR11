@@ -4,8 +4,16 @@ import { useData } from "../contexts/DataContext";
 
 const MovieDetails = () => {
     const { id } = useParams();
-    const { moviesData } = useData();
-    const movie = moviesData?.find((movie) => movie?.id === parseInt(id));
+    const {
+        moviesData,
+        handleMovieStarRating,
+        handleMovieRemoveStarRating,
+        handleAddToWatchlist,
+        handleRemoveFromWatchList,
+    } = useData();
+    const movie = moviesData?.find(
+        (movie) => movie?.id === parseInt(id) || movie?.id === id
+    );
 
     return (
         <div className="flex h-full max-w-[1280px] mx-auto justify-center mt-16">
@@ -50,12 +58,40 @@ const MovieDetails = () => {
                         ))}
                     </p>
                     <div className="bottom-5">
-                        <button className="px-5 py-2 mr-5 bg-blue-600 rounded text-white font-semibold tracking-tight">
-                            Star
-                        </button>
-                        <button className="mt-2 px-5 py-2 bg-blue-600 rounded text-white font-semibold tracking-tight">
-                            Add to wishlist
-                        </button>
+                        {movie.starred ? (
+                            <button
+                                className="px-5 py-2 mr-5 bg-red-600 rounded text-white font-semibold tracking-tight"
+                                onClick={() =>
+                                    handleMovieRemoveStarRating(movie.id)
+                                }
+                            >
+                                Unstar
+                            </button>
+                        ) : (
+                            <button
+                                className="px-5 py-2 mr-5 bg-blue-600 rounded text-white font-semibold tracking-tight"
+                                onClick={() => handleMovieStarRating(movie.id)}
+                            >
+                                Star
+                            </button>
+                        )}
+                        {movie.watchlist ? (
+                            <button
+                                className="mt-2 px-5 py-2 bg-red-600 rounded text-white font-semibold tracking-tight"
+                                onClick={() =>
+                                    handleRemoveFromWatchList(movie.id)
+                                }
+                            >
+                                Remove from watchlist
+                            </button>
+                        ) : (
+                            <button
+                                className="mt-2 px-5 py-2 bg-blue-600 rounded text-white font-semibold tracking-tight"
+                                onClick={() => handleAddToWatchlist(movie.id)}
+                            >
+                                Add to watchlist
+                            </button>
+                        )}
                     </div>
                 </div>
             </div>
