@@ -19,10 +19,15 @@ const AddMovies = () => {
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
+        const updatedValue =
+            name === "genre" || name === "cast" ? value.split(",") : value;
+
         setNewMovie((prevData) => ({
             ...prevData,
             [name]:
-                name === "genre" || name === "cast" ? value.split(",") : value,
+                name === "year" || name === "rating"
+                    ? parseInt(updatedValue)
+                    : updatedValue,
         }));
     };
 
@@ -91,7 +96,7 @@ const AddMovies = () => {
                         Year <span className="text-red-700">*</span>
                     </h1>
                     <input
-                        type="text"
+                        type="number"
                         id="year"
                         name="year"
                         value={newMovie.year}
