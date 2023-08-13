@@ -6,7 +6,6 @@ const MovieDetails = () => {
     const { id } = useParams();
     const { moviesData } = useData();
     const movie = moviesData?.find((movie) => movie?.id === parseInt(id));
-    console.log(movie);
 
     return (
         <div className="flex h-full max-w-[1280px] mx-auto justify-center mt-16">

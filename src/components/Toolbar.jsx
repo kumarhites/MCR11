@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useData } from "../contexts/DataContext";
+import { NavLink } from "react-router-dom";
 
 const Toolbar = () => {
     const {
@@ -83,9 +84,12 @@ const Toolbar = () => {
                 ))}
             </select>
             {/* add movie button */}
-            <button className="px-5 bg-blue-600 text-white py-2 mb-2 font-bold rounded">
+            <NavLink
+                to="/add"
+                className="px-5 bg-blue-600 text-white py-2 mb-2 font-bold rounded"
+            >
                 Add movie
-            </button>
+            </NavLink>
         </div>
     );
 };

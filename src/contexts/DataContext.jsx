@@ -70,6 +70,13 @@ export const DataProvider = ({ children }) => {
         localStorage.setItem("movies", JSON.stringify(updatedMovies));
     };
 
+    const handleAddNewData = (newMovie) => {
+        const newData = [...moviesData, newMovie];
+        setMoviesData(newData);
+        localStorage.removeItem("movies");
+        localStorage.setItem("movies", JSON.stringify(newData));
+    };
+
     return (
         <DataContext.Provider
             value={{
@@ -87,6 +94,7 @@ export const DataProvider = ({ children }) => {
                 setSelectedRating,
                 selectedYear,
                 setSelectedYear,
+                handleAddNewData,
             }}
         >
             {children}

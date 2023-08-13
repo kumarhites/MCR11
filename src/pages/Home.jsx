@@ -40,9 +40,15 @@ const Home = () => {
         <>
             <Toolbar />
             <div className="max-w-[1280px] mx-auto grid grid-cols-3 gap-2 place-items-center pb-10 px-5">
-                {allMovies?.map((movie) => (
-                    <Card movie={movie} key={movie.id} />
-                ))}
+                {allMovies?.length === 0 ? (
+                    <h1 className="mb-2 text-2xl font-bold tracking-tight">
+                        No movies available!
+                    </h1>
+                ) : (
+                    allMovies?.map((movie) => (
+                        <Card movie={movie} key={movie.id} />
+                    ))
+                )}
             </div>
         </>
     );
